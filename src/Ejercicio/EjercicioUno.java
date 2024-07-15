@@ -29,7 +29,24 @@ import java.util.List;
  */
 public class EjercicioUno {
 
-    // List<List<Integer>> subsets(List<Integer> set) {
+    public List<List<Integer>> subsets(List<Integer> set) {
+        List<List<Integer>> result = new ArrayList<>();
+        generateSubsets(set, 0, new ArrayList<>(), result);
 
-    // }
+        return result;
+    }
+
+    public void generateSubsets(List<Integer> set, int index, List<Integer> currentSubset, List<List<Integer>> result){
+        if (index == set.size()){
+            result.add(new ArrayList<>(currentSubset));
+            return;
+
+        }
+        currentSubset.add(set.get(index));
+        generateSubsets(set, index + 1, currentSubset, result);
+
+        currentSubset.remove(currentSubset.size() - 1);
+        generateSubsets(set, index + 1, currentSubset, result);
+
+    }
 }
